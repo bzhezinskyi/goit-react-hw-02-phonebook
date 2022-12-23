@@ -18,6 +18,7 @@ export default class ContactForm extends Component {
       const contact = { id: nanoid(), name: name, number: number };
 
       this.setState({ name: '', number: '' });
+
       return this.props.onSubmitForm(contact);
     } else {
       const message = ' is already in contacts';
