@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
+import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 
 export class App extends Component {
@@ -25,6 +25,12 @@ export class App extends Component {
     this.setState({ filter: event.currentTarget.value });
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const { contacts, filter } = this.state;
 
@@ -40,7 +46,10 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.hendleChangeFiltr} />
-        <ContactList contacts={visibleContacts} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }
